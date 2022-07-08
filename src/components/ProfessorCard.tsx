@@ -2,9 +2,12 @@ import Progress from "./subcomponents/Progress";
 
 interface ProfessorCardProps {
   instructor: string;
+  total: number;
+  grades: { [key: string]: number };
 }
 
-const ProfessorCard = ({ instructor }: ProfessorCardProps) => {
+const ProfessorCard = ({ instructor, total, grades }: ProfessorCardProps) => {
+  const entries = Object.entries(grades);
   return (
     <div className="flex justify-center">
       <div className="card w-96 bg-base-100 shadow-xl text-center">
@@ -18,8 +21,10 @@ const ProfessorCard = ({ instructor }: ProfessorCardProps) => {
             <h2 className="card-title ">{instructor}</h2>
           </div>
           <div className="divider">Report Card</div>
-          <div>5 Students</div>
-          <Progress desc="A" value={1} count={5} />
+          <div>{total} Students</div>
+          {entries.map((e) => {
+            return <Progress desc={e[0]} value={e[1] / total} count={e[1]} />;
+          })}
         </div>
       </div>
     </div>

@@ -1,5 +1,4 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 
 import Result from "./components/Result";
 
@@ -9,7 +8,6 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Result />
-      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }

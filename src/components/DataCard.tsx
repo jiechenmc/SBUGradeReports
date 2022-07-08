@@ -16,11 +16,11 @@ const DataCard = ({ Section, Term, Course, Grades }: DataCardProps) => {
     const splits = Grades.split(",");
 
     for (let i = 0; i < splits.length; ++i) {
-      let match = splits[i].match(/\w[\+\-]?/);
+      let match = splits[i].match(/\w+[\+\-]?/);
       if (i % 2 == 0) {
         grades[match![0]] = 0;
       } else {
-        const prev: string = splits[i - 1].match(/\w[\+\-]?/)![0];
+        const prev: string = splits[i - 1].match(/\w+[\+\-]?/)![0];
         grades[prev] = parseInt(match![0]);
       }
     }
