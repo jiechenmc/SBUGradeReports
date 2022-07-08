@@ -1,13 +1,17 @@
-import { useState, useEffect } from "react";
-import useFetch from "./Hooks/useFetch";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+
+import Result from "./components/Result";
+
+const queryClient = new QueryClient();
 
 function App() {
-  const data: any = useFetch(
-    "https://prof-comments.herokuapp.com/api/instructor/?name=Tripathi"
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Result />
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
-
-  const resp = data?.map((d: any) => <li>{d}</li>);
-  return <div className="App">{resp}</div>;
 }
 
 export default App;
