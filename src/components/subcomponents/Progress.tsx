@@ -10,7 +10,7 @@ const Progress = ({ desc, value, count }: ProgressProps) => {
     <div>
       <div
         className="tooltip"
-        data-tip={`${count} People | ${Math.trunc(percent)}%`}
+        data-tip={`${count} Student | ${Math.trunc(percent)}%`}
       >
         <p className="absolute">{desc}</p>
         <progress

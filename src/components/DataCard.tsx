@@ -5,53 +5,53 @@ interface DataCardProps {
   Section: string;
   Term: string;
   Course: string;
-  Grades: string;
+  Instructor: string;
+  grades: { [key: string]: number };
 }
-const DataCard = ({ Section, Term, Course, Grades }: DataCardProps) => {
+const DataCard = ({
+  Section,
+  Term,
+  Course,
+  Instructor,
+  grades,
+}: DataCardProps) => {
   let sum: number = 0;
   let gradeStats = null;
-  let grades: { [key: string]: number } = {};
 
-  if (Grades !== "[]") {
-    const splits = Grades.split(",");
+  sum = Object.values(grades).reduce((a, b) => {
+    return a + b;
+  });
 
-    for (let i = 0; i < splits.length; ++i) {
-      let match = splits[i].match(/\w+[\+\-]?/);
-      if (i % 2 == 0) {
-        grades[match![0]] = 0;
-      } else {
-        const prev: string = splits[i - 1].match(/\w+[\+\-]?/)![0];
-        grades[prev] = parseInt(match![0]);
-      }
-    }
-
-    sum = Object.values(grades).reduce((a, b) => {
-      return a + b;
+  if (sum !== 0) {
+    gradeStats = Object.keys(grades).map((key: string) => {
+      return (
+        <Progress
+          key={uuidv4()}
+          desc={key}
+          value={grades[key] / sum}
+          count={grades[key]}
+        />
+      );
     });
-
-    if (sum !== 0) {
-      gradeStats = Object.keys(grades).map((key: string) => {
-        return (
-          <Progress
-            key={uuidv4()}
-            desc={key}
-            value={grades[key] / sum}
-            count={grades[key]}
-          />
-        );
-      });
-    }
   }
 
   return (
-    <div className="card bg-base-100 shadow-xl">
-      <div className="card-body">
-        <h2 className="card-title">{Course}</h2>
+    <div className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+      <input type="checkbox" />
+      <div className="collapse-title text-xl font-medium">
+        <h2 className="card-title ">{Course}</h2>
         <p>{Term}</p>
         <p>{Section}</p>
-        <div className="card-body">
-          <h1>{sum} Students</h1>
-          <div className="grid grid-cols-3">{gradeStats}</div>
+        <p>{Instructor}</p>
+      </div>
+      <div className="collapse-content">
+        <div className="card bg-base-100 shadow-xl">
+          <div className="card-body">
+            <div className="card-body">
+              <h1>{sum} Students</h1>
+              <div className="grid grid-cols-3">{gradeStats}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
