@@ -1,3 +1,3 @@
 # seemyprofessors
 
-Inspired by rate my professors
+Look at historical grade data
