@@ -27,16 +27,18 @@ const ProfessorCard = ({ instructor, total, grades }: ProfessorCardProps) => {
           <h2 className="card-title justify-center">{instructor}</h2>
           <div className="divider">Report Card</div>
           <div>{total} Students</div>
-          {entries.map((e) => {
-            return (
-              <Progress
-                key={uuidv4()}
-                desc={e[0]}
-                value={e[1] / total}
-                count={e[1]}
-              />
-            );
-          })}
+          <div className="flex flex-col">
+            {entries.map((e) => {
+              return (
+                <Progress
+                  key={uuidv4()}
+                  desc={e[0]}
+                  value={e[1] / total}
+                  count={e[1]}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
