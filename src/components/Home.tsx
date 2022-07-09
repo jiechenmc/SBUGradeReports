@@ -1,6 +1,6 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import Result from "./Result";
-import { v4 as uuidv4 } from "uuid";
+import { ReactComponent as Star } from "../assets/Star.svg";
 
 const Home = () => {
   const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -16,6 +16,12 @@ const Home = () => {
 
   const onChange = (e: FormEvent<HTMLSelectElement>) => {
     setQueryBy(e.currentTarget.value);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && inputRef.current.value !== "") {
+      onClick();
+    }
   };
 
   useEffect(() => {
@@ -41,8 +47,14 @@ const Home = () => {
 
   return (
     <div>
-      <div className="text-center text-5xl m-5 font-bold">
-        SBU Grade Reports
+      <div className="text-center text-5xl m-5 font-bold flex justify-center gap-2">
+        <p>SBU Grade Reports</p>
+        <a
+          href="https://github.com/jiechenmc/SBUGradeReports"
+          className="w-fit h-fit"
+        >
+          <Star className="fill-white hover:fill-gray-300 w-6" />
+        </a>
       </div>
       <div className="flex justify-center mt-10">
         <div className="flex flex-col gap-2">
@@ -51,7 +63,8 @@ const Home = () => {
               ref={inputRef}
               type="text"
               placeholder="Type here"
-              className="input input-bordered input-accent w-full max-w-xs "
+              className="input input-bordered input-accent w-full max-w-xs"
+              onKeyDown={handleKeyDown}
             />
             <button className="btn" onClick={onClick}>
               Search
@@ -70,7 +83,7 @@ const Home = () => {
             <option>Term</option>
           </select>
           <h2>Examples: (searches are case-insensitive and relative)</h2>
-          <div className="flex flex-col gap-2">
+          <div id="examples" className="flex flex-col gap-2">
             {examples.map((e) => {
               return (
                 <div className="badge badge-accent badge-outline">{e}</div>
