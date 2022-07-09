@@ -47,7 +47,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className="text-center text-5xl m-5 font-bold flex justify-center gap-2">
+      <div className="text-center text-5xl m-5 font-bold flex justify-center gap-2 my-2">
         <p>SBU Grade Reports</p>
         <a
           href="https://github.com/jiechenmc/SBUGradeReports"
