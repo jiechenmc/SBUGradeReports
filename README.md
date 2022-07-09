@@ -15,7 +15,7 @@ npm i && npm run dev
 
 ## Usage
 
-Images
+![Home Page](https://user-images.githubusercontent.com/51218357/178092835-463ac81a-a009-452a-b416-e31156610708.png)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
