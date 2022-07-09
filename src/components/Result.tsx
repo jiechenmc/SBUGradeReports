@@ -51,11 +51,27 @@ const Result = ({ type, query }: ResultProps) => {
   });
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center mt-5">
+        <div className="alert alert-warning w-fit">
+          <p>Loading...</p>
+          <p>
+            Server is sleeping if this takes longer than <strong>20</strong>
+            seconds
+          </p>
+        </div>
+      </div>
+    );
   }
 
   if (status === "error") {
-    return <div>Error</div>;
+    return (
+      <div className="flex justify-center mt-5">
+        <div className="alert alert-error w-fit">
+          <p>An error has occured!</p>
+        </div>
+      </div>
+    );
   }
   if (!("detail" in data)) {
     const unprocessedGrades = data.map((e: ApiData) => e?.Grades);
