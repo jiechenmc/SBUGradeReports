@@ -135,7 +135,7 @@ const Result = ({ type, query }: ResultProps) => {
     return (
       <div className="flex flex-col">
         <ProfessorCard instructor={query} total={total} grades={globalGrades} />
-        {type !== "Term" ? (
+        {processedGrades.length <= 1000 ? (
           <Suspense>
             {data.map((e: ApiData) => (
               <DataCard
@@ -166,8 +166,7 @@ const Result = ({ type, query }: ResultProps) => {
                   />
                 </svg>
                 <span>
-                  Term data is humongous and will be truncated to prevent a
-                  freeze!
+                  Data is too large and will be truncated to prevent a freeze!
                 </span>
               </div>
             </div>
