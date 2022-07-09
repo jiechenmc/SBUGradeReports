@@ -49,7 +49,9 @@ const DataCard = ({
           <div className="card-body">
             <div className="card-body">
               <h1>{sum} Students</h1>
-              <div className="grid grid-cols-3">{gradeStats}</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                {gradeStats}
+              </div>
             </div>
           </div>
         </div>
