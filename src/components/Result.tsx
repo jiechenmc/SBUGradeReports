@@ -209,11 +209,9 @@ const Result = ({ type, query }: ResultProps) => {
             className="select select-accent w-full max-w-xs my-1"
             ref={selectRef}
             onChange={onChange}
-            defaultValue={"Instructor"}
+            defaultValue={"Filter by ..."}
           >
-            <option selected disabled>
-              Filter by ...
-            </option>
+            <option disabled>Filter by ...</option>
             {options}
           </select>
         ) : (
