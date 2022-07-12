@@ -199,7 +199,11 @@ const Result = ({ type, query }: ResultProps) => {
 
     return (
       <div className="flex flex-col">
-        <ProfessorCard instructor={query} total={total} grades={globalGrades} />
+        <ProfessorCard
+          instructor={query + "\n" + filter}
+          total={total}
+          grades={globalGrades}
+        />
         {type === "Course Code" || type === "Instructor" ? (
           <select
             className="select select-accent w-full max-w-xs my-1"
@@ -207,7 +211,9 @@ const Result = ({ type, query }: ResultProps) => {
             onChange={onChange}
             defaultValue={"Instructor"}
           >
-            <option disabled>Filter by ...</option>
+            <option selected disabled>
+              Filter by ...
+            </option>
             {options}
           </select>
         ) : (

@@ -24,7 +24,9 @@ const ProfessorCard = ({ instructor, total, grades }: ProfessorCardProps) => {
               </div>
             </div>
           </div>
-          <h2 className="card-title justify-center">{instructor}</h2>
+          <h2 className="card-title justify-center whitespace-pre-line">
+            {instructor}
+          </h2>
           <div className="divider">Report Card</div>
           <div>{total} Students</div>
           <div className="flex flex-col">
