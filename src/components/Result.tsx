@@ -205,15 +205,17 @@ const Result = ({ type, query }: ResultProps) => {
           grades={globalGrades}
         />
         {type === "Course Code" || type === "Instructor" ? (
-          <select
-            className="select select-accent w-full max-w-xs my-1"
-            ref={selectRef}
-            onChange={onChange}
-            defaultValue={"Filter by ..."}
-          >
-            <option disabled>Filter by ...</option>
-            {options}
-          </select>
+          <div className="flex justify-center my-4">
+            <select
+              className="select select-accent w-full max-w-xs"
+              ref={selectRef}
+              onChange={onChange}
+              defaultValue={"Filter by ..."}
+            >
+              <option disabled>Filter by ...</option>
+              {options}
+            </select>
+          </div>
         ) : (
           ""
         )}
