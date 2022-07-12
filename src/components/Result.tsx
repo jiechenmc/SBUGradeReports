@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useRef, useState, FormEvent } from "react";
 import { useQuery } from "react-query";
 import ProfessorCard from "./ProfessorCard";
 import { v4 as uuidv4 } from "uuid";
@@ -19,6 +19,14 @@ interface ResultProps {
   query: string;
 }
 const Result = ({ type, query }: ResultProps) => {
+  const [filter, setFilter] = useState("");
+
+  const selectRef = useRef() as React.MutableRefObject<HTMLSelectElement>;
+
+  const onChange = (e: FormEvent<HTMLSelectElement>) => {
+    setFilter(e.currentTarget.value);
+  };
+
   const fetchComments = async () => {
     let res;
     switch (type) {
@@ -45,7 +53,7 @@ const Result = ({ type, query }: ResultProps) => {
     }
   };
 
-  const { data, status } = useQuery("comments", fetchComments, {
+  const { data, status } = useQuery(["comments"], fetchComments, {
     refetchInterval: false,
     refetchOnMount: true,
   });
@@ -73,8 +81,19 @@ const Result = ({ type, query }: ResultProps) => {
       </div>
     );
   }
+
   if (!("detail" in data)) {
-    const unprocessedGrades = data.map((e: ApiData) => e?.Grades);
+    let filteredData = data.filter((comment: ApiData) => {
+      if (comment?.Instructors !== null) {
+        return (
+          comment?.Instructors.includes(filter) ||
+          comment?.Section.includes(filter)
+        );
+      }
+      return false;
+    });
+
+    const unprocessedGrades = filteredData.map((e: ApiData) => e?.Grades);
     let processedGrades: { [key: string]: number }[] = [];
 
     unprocessedGrades.forEach((Grades: string) => {
@@ -148,12 +167,56 @@ const Result = ({ type, query }: ResultProps) => {
 
     let counter = 0;
 
+    let available: string[];
+    let options;
+
+    switch (type) {
+      case "Course Code":
+        available = Array.from(
+          new Set(
+            data.map((e: ApiData) => {
+              return e?.Instructors;
+            })
+          )
+        );
+        options = available.map((e: string) => {
+          return <option>{e}</option>;
+        });
+        break;
+      case "Instructor":
+        available = Array.from(
+          new Set(
+            data.map((e: ApiData) => {
+              return e?.Section.slice(0, 6);
+            })
+          )
+        );
+        options = available.map((e: string) => {
+          return <option>{e}</option>;
+        });
+        break;
+    }
+
     return (
       <div className="flex flex-col">
         <ProfessorCard instructor={query} total={total} grades={globalGrades} />
+        {type === "Course Code" || type === "Instructor" ? (
+          <select
+            className="select select-accent w-full max-w-xs my-1"
+            ref={selectRef}
+            onChange={onChange}
+            defaultValue={"Instructor"}
+          >
+            <option disabled>Filter by ...</option>
+            {options}
+          </select>
+        ) : (
+          ""
+        )}
+
         {processedGrades.length <= 1000 ? (
           <Suspense>
-            {data.map((e: ApiData) => (
+            {filteredData.map((e: ApiData) => (
               <DataCard
                 key={uuidv4()}
                 Section={e?.Section}
