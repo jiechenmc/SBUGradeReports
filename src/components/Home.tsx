@@ -48,7 +48,11 @@ const Home = () => {
   return (
     <div>
       <div className="text-center text-5xl m-5 font-bold flex justify-center gap-2 my-2">
-        <p>SBU Grade Reports</p>
+        <div className="flex flex-col gap-2">
+          <p>SBU Grade Reports</p>
+          <p className="text-sm">Grades are what students received</p>
+          <p className="text-sm text-info">Source: ClassieEvals</p>
+        </div>
         <a
           href="https://github.com/jiechenmc/SBUGradeReports"
           className="w-fit h-fit"
@@ -56,7 +60,7 @@ const Home = () => {
           <Star className="fill-white hover:fill-gray-300 w-6" />
         </a>
       </div>
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center mt-5">
         <div className="flex flex-col gap-2">
           <div className="flex gap-2">
             <input
