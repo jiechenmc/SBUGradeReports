@@ -2,12 +2,12 @@ FROM node
 
 WORKDIR /seemyprofessors
 
-COPY package.json ./
+COPY package.json yarn.lock ./
 
-RUN npm install
+RUN yarn
 
 COPY . .
 
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["yarn", "run", "dev", "--", "--host"]
 
 EXPOSE 3000
