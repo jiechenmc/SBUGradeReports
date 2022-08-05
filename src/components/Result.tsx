@@ -172,6 +172,7 @@ const Result = ({ type, query }: ResultProps) => {
 
     switch (type) {
       case "Course Code":
+      case "Course Name":
         available = Array.from(
           new Set(
             data.map((e: ApiData) => {
@@ -204,7 +205,7 @@ const Result = ({ type, query }: ResultProps) => {
           total={total}
           grades={globalGrades}
         />
-        {type === "Course Code" || type === "Instructor" ? (
+        {type !== "Term" ? (
           <div className="flex justify-center my-4">
             <select
               className="select select-accent w-full max-w-xs"
