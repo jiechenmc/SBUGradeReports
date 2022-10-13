@@ -53,12 +53,6 @@ const Home = () => {
           <p className="text-sm">Grades are what students received</p>
           <p className="text-sm text-info">Source: ClassieEvals</p>
         </div>
-        <a
-          href="https://github.com/jiechenmc/SBUGradeReports"
-          className="w-fit h-fit"
-        >
-          <Star className="fill-white hover:fill-gray-300 w-6" />
-        </a>
       </div>
       <div className="flex justify-center mt-5">
         <div className="flex flex-col gap-2">
