@@ -1,3 +1,7 @@
+##
+## A revamp is planned winter 2022.
+##
+
 # SBUGradeReports
 
 SBUGradeReports is a way for you to view past grade data for professors, classes, and terms.
