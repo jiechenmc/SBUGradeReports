@@ -1,5 +1,6 @@
 ##
 ## A revamp is planned winter 2022.
+## Sever is down to make changes to API
 ##
 
 # SBUGradeReports
